@@ -16,6 +16,11 @@ public class Student {
     public Student() {
     }
 
+    public Student(String name, String address) {
+        this.name = name;
+        this.address = address;
+    }
+
     public int getId() {
         return id;
     }
