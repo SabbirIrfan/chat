@@ -17,8 +17,6 @@ import java.util.Optional;
 public class StudentController {
     @Autowired
     private StudentService studentService;
-//    @Autowired
-//    private StudentRepository studentRepository;
 
 
     @PostMapping("/add")
