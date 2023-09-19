@@ -15,7 +15,7 @@ public class User {
     private String email;
 
     private ArrayList<Integer> chats;
-    private ArrayList<User> friends ;
+//    private ArrayList<User> friends ;
 
     public ArrayList<Integer> getChats() {
         return chats;
@@ -25,33 +25,33 @@ public class User {
         this.chats = chats;
     }
 
-    public ArrayList<User> getFriends() {
-        return friends;
-    }
+//    public ArrayList<User> getFriends() {
+//        return friends;
+//    }
 
-    public void setFriends(ArrayList<User> friends) {
-        this.friends = friends;
-    }
+//    public void setFriends(ArrayList<User> friends) {
+//        this.friends = friends;
+//    }
 
     private String firstName;
     private String lastName;
 
-    public User( ArrayList<User> friends) {
-        this.friends = friends;
-    }
-
-
-    public Void AddUser(User user){
-        this.friends.add(user);
-        this.chats.add(user.id);
-
-        return null;
-    }
-    public Void DeleteUser(User user){
-        this.chats.remove(user.id);
-        this.friends.remove(user);
-        return null;
-    }
+//    public User( ArrayList<User> friends) {
+//        this.friends = friends;
+//    }
+//
+//
+//    public Void AddUser(User user){
+//        this.friends.add(user);
+//        this.chats.add(user.id);
+//
+//        return null;
+//    }
+//    public Void DeleteUser(User user){
+//        this.chats.remove(user.id);
+//        this.friends.remove(user);
+//        return null;
+//    }
 
     public String getEmail() {
         return email;
