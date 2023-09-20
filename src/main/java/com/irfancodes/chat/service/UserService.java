@@ -14,7 +14,7 @@ public interface UserService {
     public List<User> getAllUsers();
 
     public ResponseEntity<User> deleteUser(Integer id);
-    public ResponseEntity<User> getONEUser(Integer id);
 
+    public ResponseEntity<User> getONEUser(Integer id);
 
 }

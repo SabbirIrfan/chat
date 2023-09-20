@@ -1,9 +1,7 @@
 package com.irfancodes.chat.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import com.irfancodes.chat.model.Chat;
 
 import java.util.ArrayList;
 
@@ -14,44 +12,23 @@ public class User {
     private  int id;
     private String email;
 
-    private ArrayList<Integer> chats;
-//    private ArrayList<User> friends ;
+    private String firstName;
+    private String lastName;
 
-    public ArrayList<Integer> getChats() {
-        return chats;
-    }
+    private ArrayList<Integer> chats;
+
+
+
 
     public void setChats(ArrayList<Integer> chats) {
         this.chats = chats;
     }
+    public ArrayList<Integer> getChats() {
+        return chats;
+    }
 
-//    public ArrayList<User> getFriends() {
-//        return friends;
-//    }
 
-//    public void setFriends(ArrayList<User> friends) {
-//        this.friends = friends;
-//    }
 
-    private String firstName;
-    private String lastName;
-
-//    public User( ArrayList<User> friends) {
-//        this.friends = friends;
-//    }
-//
-//
-//    public Void AddUser(User user){
-//        this.friends.add(user);
-//        this.chats.add(user.id);
-//
-//        return null;
-//    }
-//    public Void DeleteUser(User user){
-//        this.chats.remove(user.id);
-//        this.friends.remove(user);
-//        return null;
-//    }
 
     public String getEmail() {
         return email;
@@ -84,4 +61,6 @@ public class User {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
+
 }

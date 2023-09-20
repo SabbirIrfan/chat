@@ -1,12 +1,13 @@
 package com.irfancodes.chat.service;
 
-import com.irfancodes.chat.model.Student;
+import com.irfancodes.chat.model.Chat;
 import com.irfancodes.chat.model.User;
 import com.irfancodes.chat.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,6 +16,9 @@ import java.util.Optional;
 public class UserServiceIml implements  UserService{
     @Autowired
     private UserRepository userRepository;
+
+
+
     @Override
     public Void register(User user) {
         // Perform password hashing here before saving to the database
@@ -32,6 +36,8 @@ public class UserServiceIml implements  UserService{
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
+
+    @Override
     public ResponseEntity<User> deleteUser(Integer id) {
         User user = userRepository.findById(id).orElse(null);
 
@@ -44,6 +50,8 @@ public class UserServiceIml implements  UserService{
 
 
     }
+
+
 
     @Override
     public ResponseEntity<User> getONEUser(Integer id) {
