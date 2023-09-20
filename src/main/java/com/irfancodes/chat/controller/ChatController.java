@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/message")
@@ -27,9 +28,15 @@ public class ChatController {
         return chatService.addMessage(message);
 
     }
-    @GetMapping("/getAllMessage/:{id}")
+    @GetMapping("/getAllMessage/{id}")
     public List<Message> add(@PathVariable Integer id){
-        return chatService.getAllMessage(id);
+
+        List<Message> messages =  chatService.getAllMessage(id);
+        List<Message> sortedList = messages.stream()
+                .sorted((p1, p2) -> p2.getTimestamp().compareTo(p1.getTimestamp()))
+                .toList();
+
+        return sortedList;
 
     }
 }
