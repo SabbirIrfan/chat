@@ -9,7 +9,9 @@ import java.util.List;
 public interface ChatService {
     public String addChat(Chat chat) ;
     public String addMessage(Message message);
-    public List<Message> getAllMessage(Integer chatId);
+
+    public List<Message> getAll() ;
+        public List<Message> getAllMessage(Integer chatId);
 
 
     }

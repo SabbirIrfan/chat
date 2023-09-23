@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import com.irfancodes.chat.model.Chat;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 public class User {
@@ -12,18 +15,38 @@ public class User {
     private  int id;
     private String email;
 
-    private String firstName;
+    public String getName() {
+
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    private String name;
+
+    private Set<Integer> chats = new HashSet<>();
+
+    private Set<String> friends = new HashSet<>();
+
+
     private String lastName;
 
-    private ArrayList<Integer> chats;
 
 
+    public Set<String> getFriends() {
+        return friends;
+    }
 
+    public void setFriends(Set<String> friends) {
+        this.friends = friends;
+    }
 
-    public void setChats(ArrayList<Integer> chats) {
+    public void setChats(Set<Integer> chats) {
         this.chats = chats;
     }
-    public ArrayList<Integer> getChats() {
+    public Set<Integer> getChats() {
         return chats;
     }
 
@@ -46,13 +69,6 @@ public class User {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
 
     public String getLastName() {
         return lastName;

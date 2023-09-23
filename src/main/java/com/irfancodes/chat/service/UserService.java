@@ -5,6 +5,8 @@ import com.irfancodes.chat.model.User;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
+import java.util.Set;
+
 
 public interface UserService {
 
@@ -13,8 +15,16 @@ public interface UserService {
 
     public List<User> getAllUsers();
 
-    public ResponseEntity<User> deleteUser(Integer id);
+    public String deleteUser(String firstName);
 
-    public ResponseEntity<User> getONEUser(Integer id);
+    public User getONEUser(String firstName);
+    public void addChat(String email, Integer id);
+    public void addFriend(String email,String firstName);
+    public Set<String> getFriends(String email);
+
+    public Set<Integer> getChatsByEmail(String email);
+    public Set<Integer> getChatsByName(String firstName);
+
+
 
 }

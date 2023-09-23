@@ -7,7 +7,12 @@ import com.irfancodes.chat.repository.MessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
+import javax.xml.crypto.Data;
+import java.sql.Time;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -28,7 +33,9 @@ public class ChatServiceImpl implements ChatService {
 
         return "adding chat successfully";
     }
-
+    public LocalDateTime getCurrentLocalDateTime() {
+        return LocalDateTime.now();
+    }
     @Override
     public String addMessage(Message message) {
 
@@ -38,9 +45,17 @@ public class ChatServiceImpl implements ChatService {
     }
 
     @Override
+    public List<Message> getAll() {
+
+        List<Message> m =  messageRepository.findAll();
+        System.out.println(m+"message");
+        return  m;
+    }
+    @Override
     public List<Message> getAllMessage(Integer chatId) {
 
-
-        return   messageRepository.findByChatId(chatId);
+        List<Message> m =  messageRepository.findByChatId(chatId);
+        System.out.println(m +"message");
+        return  m;
     }
 }

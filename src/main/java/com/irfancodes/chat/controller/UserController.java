@@ -8,10 +8,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/user")
-@CrossOrigin
+@CrossOrigin(origins = "*")
 public class UserController {
 
     @Autowired
@@ -21,15 +22,39 @@ public class UserController {
     public List<User> list(){
         return userServiceIml.getAllUsers();
     }
-    @GetMapping("/{id}")
-    public ResponseEntity<User> getEntityById(@PathVariable Integer id) {
-        return userServiceIml.getONEUser(id);
+    @GetMapping("/{firstName}")
+    public User getEntityById(@PathVariable String firstName) {
+        return userServiceIml.getONEUser(firstName);
     }
 
     // Delete a user by ID
-    @DeleteMapping("del/{id}")
-    public ResponseEntity<User> deleteUser(@PathVariable Integer id) {
-        return userServiceIml.deleteUser(id);
+    @DeleteMapping("delete/{firstName}")
+    public String deleteUser(@PathVariable String firstName) {
+        return userServiceIml.deleteUser(firstName);
     }
+
+    @PutMapping("addChat/{email}/{chatId}")
+    public void addChat(@PathVariable String email,@PathVariable Integer chatId) {
+        userServiceIml.addChat(email,chatId);
+    }
+    @PutMapping("addFriend/{userEmail}/{friendName}")
+    public void addFriend(@PathVariable String userEmail,@PathVariable String friendName) {
+        userServiceIml.addFriend(userEmail,friendName);
+    }
+    @GetMapping("getAllFriend/{email}")
+    public Set<String> friendList(@PathVariable String email){
+        return userServiceIml.getFriends(email);
+    }
+    @GetMapping("getChatsByName/{fname}")
+    public Set<Integer> getChatsByName(@PathVariable String fname){
+        return userServiceIml.getChatsByEmail(fname);
+    }
+    @GetMapping("getChatsByEmail/{email}")
+    public Set<Integer> getChatsByEmail(@PathVariable String email){
+        return userServiceIml.getChatsByEmail(email);
+    }
+
+
+
 
 }
