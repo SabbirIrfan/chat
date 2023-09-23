@@ -32,22 +32,26 @@ public class ChatController {
     public List<Message> getAllMessage(@PathVariable Integer id){
 
         List<Message> messages =  chatService.getAllMessage(id);
-        List<Message> sortedList = messages.stream()
-                .sorted((p1, p2) -> p2.getTimestamp().compareTo(p1.getTimestamp()))
-                .toList();
+        if(messages.isEmpty()) messages = new ArrayList<>();
 
-        return sortedList;
+
+        return messages;
 
     }
     @GetMapping("/getAll")
     public List<Message> add(){
 
         List<Message> messages =  chatService.getAll();
-        List<Message> sortedList = messages.stream()
-                .sorted((p1, p2) -> p2.getTimestamp().compareTo(p1.getTimestamp()))
-                .toList();
 
-        return sortedList;
+        return messages;
+
+    }
+
+    @GetMapping("/getChatId/{email1}/{email2}")
+    public Chat getChatId(@PathVariable String email1,@PathVariable String email2){
+
+        return chatService.getChatIdByEmail(email1,email2);
+
 
     }
 }

@@ -17,6 +17,9 @@ public class Chat {
 
     private String emails;
 
+    public Chat() {
+    }
+
     public Chat(int user1Id, int user2Id, String emails) {
         this.user1Id = user1Id;
         this.user2Id = user2Id;

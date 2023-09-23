@@ -13,11 +13,18 @@ public class Message {
      ////what does this needed for
     private Integer chatId;
 
-    private Integer senderId;
+    private String senderName;
+
+    public String getSenderName() {
+        return senderName;
+    }
+
+    public void setSenderName(String senderName) {
+        this.senderName = senderName;
+    }
 
     private String content;
 
-    private LocalDateTime timestamp;
 
 //    public Message() {
 //    }
@@ -46,13 +53,7 @@ public class Message {
         this.chatId = chatId;
     }
 
-    public int getSenderId() {
-        return senderId;
-    }
 
-    public void setSenderId(Integer senderId) {
-        this.senderId = senderId;
-    }
 
     public String getContent() {
         return content;
@@ -62,11 +63,5 @@ public class Message {
         this.content = content;
     }
 
-    public LocalDateTime getTimestamp() {
-        return timestamp;
-    }
 
-    public void setTimestamp(LocalDateTime timestamp) {
-        this.timestamp = timestamp;
-    }
 }

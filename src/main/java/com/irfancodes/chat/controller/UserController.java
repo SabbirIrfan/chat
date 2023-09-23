@@ -22,10 +22,15 @@ public class UserController {
     public List<User> list(){
         return userServiceIml.getAllUsers();
     }
-    @GetMapping("/{firstName}")
-    public User getEntityById(@PathVariable String firstName) {
-        return userServiceIml.getONEUser(firstName);
+    @GetMapping("name/{firstName}")
+    public User getUserByName(@PathVariable String firstName) {
+        return userServiceIml.getONEUserByName(firstName);
     }
+    @GetMapping("email/{email}")
+    public User getUserByEmail(@PathVariable String email) {
+        return userServiceIml.getONEUserByEmail(email);
+    }
+
 
     // Delete a user by ID
     @DeleteMapping("delete/{firstName}")

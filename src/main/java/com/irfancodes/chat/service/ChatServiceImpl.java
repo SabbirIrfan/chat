@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static java.util.Collections.sort;
+
 @Service
 public class ChatServiceImpl implements ChatService {
 
@@ -40,7 +42,7 @@ public class ChatServiceImpl implements ChatService {
     public String addMessage(Message message) {
 
         messageRepository.save(message);
-
+        System.out.println("i am here in add message");
         return "message has been saved to database successfully";
     }
 
@@ -55,7 +57,24 @@ public class ChatServiceImpl implements ChatService {
     public List<Message> getAllMessage(Integer chatId) {
 
         List<Message> m =  messageRepository.findByChatId(chatId);
-        System.out.println(m +"message");
+        System.out.println(m +"message is added");
         return  m;
+    }
+
+    @Override
+    public Chat getChatIdByEmail(String email1, String email2) {
+        List<String> emailss = new ArrayList<>();
+        emailss.add(email1);
+        emailss.add(email2);
+        sort(emailss);
+        String addedEmail = emailss.get(0)+emailss.get(1);
+
+        Chat ans = chatRepository.findByEmails(addedEmail);
+        if(ans!=null){
+
+            return ans;
+        }
+
+        return null;
     }
 }

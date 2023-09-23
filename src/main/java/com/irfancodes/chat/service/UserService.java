@@ -17,7 +17,8 @@ public interface UserService {
 
     public String deleteUser(String firstName);
 
-    public User getONEUser(String firstName);
+    public User getONEUserByName(String firstName);
+    public User getONEUserByEmail(String Email);
     public void addChat(String email, Integer id);
     public void addFriend(String email,String firstName);
     public Set<String> getFriends(String email);

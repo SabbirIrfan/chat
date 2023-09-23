@@ -11,7 +11,8 @@ public interface ChatService {
     public String addMessage(Message message);
 
     public List<Message> getAll() ;
-        public List<Message> getAllMessage(Integer chatId);
+    public List<Message> getAllMessage(Integer chatId);
+    public Chat getChatIdByEmail(String email1, String email2);
 
 
     }

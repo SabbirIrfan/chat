@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.*;
 
+import static java.util.Collections.sort;
+
 
 @Service
 @CrossOrigin
@@ -57,8 +59,15 @@ public class UserServiceIml implements  UserService{
 
 
     @Override
-    public User getONEUser(String firstName) {
+    public User getONEUserByName(String firstName) {
         User user = userRepository.findByName(firstName);
+
+        return user;
+    }
+
+    @Override
+    public User getONEUserByEmail(String Email) {
+        User user = userRepository.findByEmail(Email);
 
         return user;
     }
@@ -91,7 +100,9 @@ public class UserServiceIml implements  UserService{
             Set<String> friends = user.getFriends();
             User user1 = userRepository.findByName(firstName);
 
-
+            if(user.getName().equals(firstName)){
+                return ;
+            }
             if(user != null && user1 != null){
 
                 int user1Id = user.getId();
@@ -105,6 +116,10 @@ public class UserServiceIml implements  UserService{
                 String email1 = user.getEmail();
                 String email2 = user1.getEmail();
                 String chatEmail = email1+email2;
+                List<String> emailss = new ArrayList<>();
+                emailss.add(email1);
+                emailss.add(email2);
+                sort(emailss);
                 Chat chat = new Chat(user1Id,user2Id,chatEmail);
                 chatRepository.save(chat);
 
