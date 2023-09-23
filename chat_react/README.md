@@ -7,6 +7,7 @@ change working directory to chat_react
 
 ## initialize the project
 npm install
+npm audit fix --force
 
 ## Available Scripts
 
