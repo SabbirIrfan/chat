@@ -5,15 +5,11 @@ This repository contains the backend code for a simple chat application built wi
 ## Table of Contents
 
 - [Getting Started](#getting-started)
-  - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
+    - [Prerequisites](#prerequisites)
+    - [Installation](#installation)
 - [Configuration](#configuration)
-  - [MySQL Database](#mysql-database)
-- [Usage](#usage)
-- [API Endpoints](#api-endpoints)
-- [WebSocket Integration](#websocket-integration)
-- [Contributing](#contributing)
-- [License](#license)
+    - [MySQL Database](#mysql-database)
+
 
 ## Getting Started
 
@@ -32,7 +28,7 @@ Before you begin, ensure you have met the following requirements:
 
    ```sh
    https://github.com/SabbirIrfan/chat/
-2. Open the project in your IDE.
+2. Open the project in intellij .
 
 Configure your MySQL database connection in src/main/resources/application.properties. You can use the following properties as a starting point:
 
@@ -43,8 +39,48 @@ spring.datasource.username=your_username
 spring.datasource.password=your_password
 spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 
-Build and run the application from your IDE or using the following command:
+Build and run the application from your IDE :
+
+
+## run chatsystemApplication.java
+
+
+or using the following command:
 
 sh
 
 mvn spring-boot:run
+
+
+# chat# Chat App FrontEnd  
+
+## Getting Started with Create React App
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## Installation
+### `npm install`
+### `npm audit fix --force`
+### `nvm install v16`
+### `npm start`
+
+## Available Scripts
+
+In the project directory, you can run:
+
+### `npm start`
+
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+The page will reload if you make edits.\
+You will also see any lint errors in the console.
+
+
+
+## Learn More
+
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+To learn React, check out the [React documentation](https://reactjs.org/).
+
