@@ -96,25 +96,31 @@ public class UserServiceIml implements  UserService{
 
     @Override
     public void addFriend(String email,String firstName) {
-            User user = userRepository.findByEmail(email);
-            Set<String> friends = user.getFriends();
-            User user1 = userRepository.findByName(firstName);
+            User user1 = userRepository.findByEmail(email);
+            User user2 = userRepository.findByName(firstName);
 
-            if(user.getName().equals(firstName)){
-                return ;
-            }
-            if(user != null && user1 != null){
 
-                int user1Id = user.getId();
-                int user2Id = user1.getId();
-                Set<String> friends1 = user.getFriends();
-                Set<String> friends2 = user.getFriends();
-                friends1.add(user1.getName());
-                friends2.add(user.getName());
-                user.setFriends(friends1);
-                user1.setFriends(friends2);
-                String email1 = user.getEmail();
-                String email2 = user1.getEmail();
+
+            if(user1 != null && user2 != null){
+
+                int user1Id = user1.getId();
+                int user2Id = user2.getId();
+                Set<String> friends1 = user1.getFriends();
+                Set<String> friends2 = user1.getFriends();
+//                if(friends1==null){
+//                    friends1 = new HashSet<>();
+//                }
+//                if(friends2==null){
+//                    friends2 = new HashSet<>();
+//                }
+
+                friends1.add(user2.getName());
+                friends2.add(user1.getName());
+
+                user1.setFriends(friends1);
+                user2.setFriends(friends2);
+                String email1 = user1.getEmail();
+                String email2 = user2.getEmail();
                 String chatEmail = email1+email2;
                 List<String> emailss = new ArrayList<>();
                 emailss.add(email1);
@@ -124,8 +130,8 @@ public class UserServiceIml implements  UserService{
                 chatRepository.save(chat);
 
 
-                Set<Integer> chats1 = user.getChats();
-                Set<Integer> chats2 = user1.getChats();
+                Set<Integer> chats1 = user1.getChats();
+                Set<Integer> chats2 = user2.getChats();
 
                 if(chats1 == null){
                     chats1 = new HashSet<>();
@@ -136,14 +142,12 @@ public class UserServiceIml implements  UserService{
                 chats1.add(chat.getId()); /// will this get chatID??
                 chats2.add((chat.getId()));
 
-                user.setChats(chats1);
-                user1.setChats(chats2);
+                user1.setChats(chats1);
+                user2.setChats(chats2);
+                userRepository.save(user2);
                 userRepository.save(user1);
-                userRepository.save(user);
             }
-            if(friends==null){
-                friends = new HashSet<>();
-            }
+
 
 
     }
@@ -159,7 +163,7 @@ public class UserServiceIml implements  UserService{
             }
             return user.getFriends();
         } else {
-            Set<String> empty = new HashSet<>();
+            Set<String> empty = new HashSet<String>();
             return empty;
         }
     }
