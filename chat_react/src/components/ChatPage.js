@@ -1,5 +1,6 @@
 import React, { useState,useEffect } from 'react';
 import ChatMessages from './ChatMessages'; // Import the ChatMessages component
+import { Sync } from '@material-ui/icons';
 
 function ChatPage({ userEmail }) {
   const  [mainUser,setMainUser] = useState('');
@@ -16,16 +17,31 @@ function ChatPage({ userEmail }) {
 
 useEffect(()=>{
     console.log(userEmail);
+    if(!userEmail) return;
 
     fetch(`http://localhost:8080/user/getAllFriend/${userEmail}`)
-    .then(res=>res.json())
+    .then(
+      (response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json(); // Attempt to parse the response as JSON
+      }
+    )
     .then((result)=>{
         
       setFriends(result);
     }
   )
   fetch(`http://localhost:8080/user/email/${userEmail}`)
-    .then(res=>res.json())
+    .then(
+      (response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json(); // Attempt to parse the response as JSON
+      }
+      )
     .then((result)=>{
         console.log(result);
       setMainUser(result);
@@ -47,25 +63,37 @@ useEffect(()=>{
   const  handleShowMessage = ( id) =>{
     console.log("fetched chat id? in show message")
     console.log(id)
-    if(id === undefined) {
+    if(!id) {
         return;
     }
-    fetch(`http://localhost:8080/message/getAllMessage/${id}`)
-    .then(res=>res.json())
-    .then((result)=>{
-        
-         
-        let msg =[];
-
-        
-        result.forEach(element => {
-            msg.push(element.content);
-        });
-        console.log(msg);
-        if(msg.length == 0) return;
-        setMessages(msg);
+    try {
+    
+      fetch(`http://localhost:8080/message/getAllMessage/${id}`)
+      .then(
+        (response) => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.json(); // Attempt to parse the response as JSON
+        }
+      )
+      .then((result)=>{
+          
+           
+          let msg =[];
+  
+          
+          result.forEach(element => {
+              msg.push(element.content);
+          });
+          console.log(msg);
+          if(msg.length == 0) return;
+          setMessages(msg);
+      })  ;
+    } catch (error) {
+      console.log(error);
     }
-  )
+    
     
 
   };
@@ -74,7 +102,9 @@ useEffect(()=>{
     fetch(`http://localhost:8080/user/addFriend/${userEmail}/${newFriend}`,{
       method:"PUT",
       headers:{"Content-Type":"application/json"},
+      
       body:JSON.stringify()
+      
     }).then(()=>{
       console.log("New friend added")
     })
@@ -103,30 +133,41 @@ const getChatId = ()=>{
     console.log("fetching chat Id");
     
     console.log("chatter email is "+ chatterEmail+" userEmail is "+ userEmail);
-    if(!chatterEmail) 
+    if(!chatterEmail || !userEmail) 
     {
-        alert("no friend found, try again");
+        alert("no chat selected , try again");
         return;
 
     }
-    fetch(`http://localhost:8080/message/getChatId/${userEmail}/${chatterEmail}`)
-    .then(res=>res.json())
+    try {
+      fetch(`http://localhost:8080/message/getChatId/${userEmail}/${chatterEmail}`)
+    .then(
+      (response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json(); // Attempt to parse the response as JSON
+      }
+    )
     .then((result)=>{
         
       setChatId(result.id);
       console.log(chatId);
 
 
+    });
+    } catch (error) {
+      console.log(error);
     }
-  )
+    
     handleShowMessage(chatId);
     // console.log(list2);
 
 }
 
-const handleChatter = async (name)=>{
+const handleChatter =  (name)=>{
 
-    await setChatterName(name);
+    setChatterName(name);
     console.log(chatterName);
     getChatId();
     
@@ -134,41 +175,85 @@ const handleChatter = async (name)=>{
 }
 
   const handleSendMessage = (text) => {
+    if(!chatId) return;
+
+
     console.log(text);
+    if(text === "") {
+      try {
+        fetch(`http://localhost:8080/message/addMessage`,{
+          method:"POST",
+          headers:{"Content-Type":"application/json"},
+          body:JSON.stringify(message)
+        }).then(()=>{
+        })  
+      } catch (error) {
+        console.log(error);
+      }
+      return;
+    }
     getChatId();
     console.log(chatId);
     const currentLocalDateTime = new Date();
-    let message = {
-    "chatId": `${chatId}`,
-    "senderName" : `${mainUser.name}`,
-    "content" : `${text}`
-    
+    let message ;
+    try {
+       message = {
+        "chatId": `${chatId}`,
+        "senderName" : `${mainUser.name}`,
+        "content" : `${text}`
+        
+        }  
+    } catch (error) {
+      console.log("in send message");
     }
-    fetch(`http://localhost:8080/message/addMessage`,{
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify(message)
-    }).then(()=>{
-    })
+    
+    try {
+      fetch(`http://localhost:8080/message/addMessage`,{
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify(message)
+      }).then(()=>{
+      })  
+    } catch (error) {
+      console.log(error);
+    }
+    
     if (text.trim() !== '') {
     
       // Create a new message object and add it to the messages state
     
-    //   setMessages([...messages, newMessage]);
+      setMessages([...messages, text]);
     }
   };
 
 
   const getChtterMail = (value) =>{
-    fetch(`http://localhost:8080/user/name/${value}`)
-    .then(res=>res.json())
+    console.log(value.type + "------- " + value)
+    if(!value) {
+      alert("please type the friend name properly and press enter twice");
+      return;
+    }
+    try {
+      fetch(`http://localhost:8080/user/name/${value}`)
+    .then(
+      (response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json(); // Attempt to parse the response as JSON
+      }
+    )
     .then((result) =>{
         console.log("chat email is fetching  ");
         console.log(result.email);
         setChatterEmail(result.email);
-    })
+    })  
+    } catch (error) {
+      console.log(error);
+    }
+    
   }
-  const handleSetChat =(value) =>{
+  const handleSetChat = (value) =>{
     
     getChtterMail(value);
 
@@ -190,7 +275,6 @@ const handleChatter = async (name)=>{
           onKeyPress={(e) => {
             if (e.key === 'Enter') {
               handleSetChat(e.target.value);
-              e.target.value = '';
             }
           }}
           
@@ -213,7 +297,7 @@ const handleChatter = async (name)=>{
         <button onClick={handleAddFriend}>Add Friend</button>
       </div>
       <div className="chat-area">
-        <h2>Chat Area</h2>
+        <h2>${chatterName}</h2>
         <ChatMessages messages={messages} /> {/* Add the ChatMessages component */}
         <div className="message-input">
           <input
@@ -222,10 +306,13 @@ const handleChatter = async (name)=>{
             onKeyPress={(e) => {
               if (e.key === 'Enter') {
                 handleSendMessage(e.target.value);
-                e.target.value = '';
+                e.target.value='';
+               
               }
             }}
+            
           />
+
           
         </div>
       </div>
