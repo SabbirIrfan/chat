@@ -121,11 +121,14 @@ public class UserServiceIml implements  UserService{
                 user2.setFriends(friends2);
                 String email1 = user1.getEmail();
                 String email2 = user2.getEmail();
-                String chatEmail = email1+email2;
-                List<String> emailss = new ArrayList<>();
-                emailss.add(email1);
-                emailss.add(email2);
-                sort(emailss);
+                List<String> sortChat = new ArrayList<>();
+                sortChat.add(email1);
+                sortChat.add(email2);
+                Collections.sort(sortChat);
+
+                String chatEmail = sortChat.get(0)+sortChat.get(1);
+
+
                 Chat chat = new Chat(user1Id,user2Id,chatEmail);
                 chatRepository.save(chat);
 
