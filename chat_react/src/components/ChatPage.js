@@ -89,6 +89,14 @@ useEffect(()=>{
           console.log(msg);
           if(msg.length == 0) return;
           setMessages(msg);
+      }) .catch(error => {
+        if (error.name === 'SyntaxError') {
+          // Handle the case where the response body is empty or not valid JSON
+          console.error('Response does not contain valid JSON:', error);
+        } else {
+          // Handle other types of errors, such as network errors
+          console.error('Error:', error);
+        }
       })  ;
     } catch (error) {
       console.log(error);
@@ -155,6 +163,14 @@ const getChatId = ()=>{
       console.log(chatId);
 
 
+    }) .catch(error => {
+      if (error.name === 'SyntaxError') {
+        // Handle the case where the response body is empty or not valid JSON
+        console.error('Response does not contain valid JSON:', error);
+      } else {
+        // Handle other types of errors, such as network errors
+        console.error('Error:', error);
+      }
     });
     } catch (error) {
       console.log(error);
@@ -179,22 +195,9 @@ const handleChatter =  (name)=>{
 
 
     console.log(text);
-    if(text === "") {
-      try {
-        fetch(`http://localhost:8080/message/addMessage`,{
-          method:"POST",
-          headers:{"Content-Type":"application/json"},
-          body:JSON.stringify(message)
-        }).then(()=>{
-        })  
-      } catch (error) {
-        console.log(error);
-      }
-      return;
-    }
+    
     getChatId();
     console.log(chatId);
-    const currentLocalDateTime = new Date();
     let message ;
     try {
        message = {
@@ -247,7 +250,15 @@ const handleChatter =  (name)=>{
         console.log("chat email is fetching  ");
         console.log(result.email);
         setChatterEmail(result.email);
-    })  
+    }) .catch(error => {
+      if (error.name === 'SyntaxError') {
+        // Handle the case where the response body is empty or not valid JSON
+        console.error('Response does not contain valid JSON:', error);
+      } else {
+        // Handle other types of errors, such as network errors
+        console.error('Error:', error);
+      }
+    }); 
     } catch (error) {
       console.log(error);
     }

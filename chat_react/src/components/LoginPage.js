@@ -33,7 +33,7 @@ function LoginPage({ onLogin }) {
 
   return (
     <div className="login-page">
-      <div>
+     
       <h2>Login</h2>
       <input
         type="text"
@@ -42,10 +42,10 @@ function LoginPage({ onLogin }) {
         onChange={handleEmailChange}
       />
       <button onClick={handleLogin}>Login</button>
-      </div>
-      <div>
+      
+      
       <Register onLogin={handleRegister} />
-      </div>
+      
     </div>
   );
 }

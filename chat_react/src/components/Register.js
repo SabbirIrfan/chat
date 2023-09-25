@@ -40,7 +40,7 @@ function Register({ onLogin }) {
   
 
   return (
-    <div className="login-page">
+    <div >
       <h2>Register</h2>
      
       <input
