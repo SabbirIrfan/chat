@@ -28,15 +28,73 @@ body {
 }
 
 /* Login Page */
-.login-page {
+.login-portion{
+  flex: 1.1;
   background-color: #fff;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 20px;
   text-align: center;
-  width: 300px;
   margin: 0 auto;
+  padding-top: 250px;
+  padding-bottom: 300px;
+  
+
+} 
+
+/* ///// */
+.slider-container {
+  width: 70%; /* Adjust the width as needed */
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto; /* Center the container horizontally */
+  padding: 20px; /* Add padding for spacing */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); /* Add a shadow effect */
+  border-radius: 10px; /* Add rounded corners */
+  background-color: #ffffff; /* Set the background color */
 }
+
+.slider-page {
+  display: flex; /* Use flexbox for layout */
+  justify-content: center; /* Center content horizontally */
+  align-items: center; /* Center content vertically */
+  height: 100%; /* Set the height of each slide */
+  /* background-color: #f0f0f0; Background color for the slides */
+  border-radius: 10px; /* Add rounded corners to each slide */
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2); /* Add a shadow effect */
+  padding: auto;
+  padding-left: 0px;
+  margin: 0 10px; /* Add margin to create spacing between slides */
+  transition: background-color 0.3s ease; /* Add a transition effect for background color changes */
+  /* Additional styling properties as needed */
+}
+
+.slider-page:hover {
+  background-color: #e0e0e0; /* Change background color on hover */
+  cursor: pointer; /* Change cursor to pointer on hover */
+}
+
+.slider-page h2 {
+  font-size: 24px;
+  color: #333;
+}
+/* ////// */
+.slider {
+  flex: 1;
+  background-color: #f0f0f0;
+  padding: 20px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); /* Add shadow effect */
+  border-radius: 15px; /* Add rounded corners */
+  margin: 10px; /* Add margin to create spacing between sliders */
+  
+}
+
+
+
+
+
+
 
 .login-page h2 {
   font-size: 24px;
@@ -52,16 +110,16 @@ body {
 }
 
 .login-page button {
-  background-color: #007bff;
+  background-color: #5d7997;
   color: #fff;
   padding: 10px 20px;
   border: none;
-  border-radius: 5px;
+  border-radius: 20px;
   cursor: pointer;
 }
 
 .login-page button:hover {
-  background-color: #0056b3;
+  background-color: #4b627a;
 }
 
 /* Chat Page */
@@ -217,4 +275,40 @@ body {
     width: 100%;
     margin-bottom: 20px;
   }
+}
+
+.login-page {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  text-align: center;
+  margin: 0 auto;
+  height: 900px;
+}
+
+.slider-left {
+  flex: 1;
+  background-color: #d4c9c9;
+  border-radius: 10px;
+  cursor: cell;
+
+  
+  /* Add additional styling for the left slider */
+}
+
+.login-content {
+  flex: 2;
+  background-color: #ffffff;
+  padding: 20px;
+  /* Add styling for the login portion */
+}
+
+.slider-right {
+  flex: 1;
+  background-color: #f0f0f0;
+  /* Add additional styling for the right slider */
 }
