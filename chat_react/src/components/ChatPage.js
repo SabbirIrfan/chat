@@ -1,7 +1,7 @@
 import React, { useState,useEffect } from 'react';
 import ChatMessages from './ChatMessages'; // Import the ChatMessages component
 import { Sync } from '@material-ui/icons';
-
+import Footer from './Footer';
 function ChatPage({ userEmail }) {
   const  [mainUser,setMainUser] = useState('');
   
@@ -15,6 +15,9 @@ function ChatPage({ userEmail }) {
   const [chatId,setChatId] = useState();
 
 
+  useEffect(()=>{
+
+  },[messages]);
 useEffect(()=>{
     console.log(userEmail);
     if(!userEmail) return;
@@ -59,8 +62,23 @@ useEffect(()=>{
         
   
 //   },[])
+// let intervalId; // Declare intervalId outside of the if statement
+
+// if (chatId) {
+//   intervalId = setInterval(() => handleShowMessage(chatId), 1000); // 1000 milliseconds = 1 second
+//    // Clear the interval if chatId is falsy
+// }
+// let intervalId2;
+
+
+// if (intervalId) {
+//   intervalId2 = setInterval(() => clearInterval(intervalId), 2000); // 1000 milliseconds = 1 second
+//    // Clear the interval if chatId is falsy
+// }
+
+
   
-  const  handleShowMessage = ( id) =>{
+  const  handleShowMessage = (id) =>{
     console.log("fetched chat id? in show message")
     console.log(id)
     if(!id) {
@@ -224,8 +242,10 @@ const handleChatter =  (name)=>{
     if (text.trim() !== '') {
     
       // Create a new message object and add it to the messages state
-    
-      setMessages([...messages, text]);
+      if(chatId)
+        {
+          handleShowMessage(chatId);
+        }
     }
   };
 
@@ -272,35 +292,59 @@ const handleChatter =  (name)=>{
 
     console.log("chatter email is "+ chatterEmail);
     getChatId();
+    if(chatId){
+     handleShowMessage(chatId)
+    }
   }
 
+  function handleButtonClick() {
+    // Get the input element by its id
+    const inputElement = document.getElementById('input_msg');
+  
+    // Check if the input element exists and has a value
+    if (inputElement && inputElement.value) {
+      const inputValue = inputElement.value;
+      // Do something with the inputValue, like passing it to another function or component
+     handleSendMessage(inputValue);
+     if(chatId) handleShowMessage(chatId);
+    } else {
+      console.log('Input is empty');
+    }
+  }
+  
 
 
   return (
+    <div>
     <div className="chat-page">
      <div className="friend-list">
      <input
           id="set-chat"
           type="text"
+          
           placeholder="Enter friend's name to chat with"
           onKeyPress={(e) => {
             if (e.key === 'Enter') {
               handleSetChat(e.target.value);
+              if(chatId){
+                handleShowMessage(chatId);
+              }
             }
           }}
           
         />
         
         <h2>Friend List</h2>
-        <ul className="contact-list">
+        <ul className="friend-list ul">
           {friends.map((friend, index) => (
             <li id={index}>
-            <button className="friend-button" >{friend}</button>
+            <h5 className="friends" >{friend}</h5>
             </li>
           ))}
         </ul>
         <input
           type="text"
+          
           placeholder="Enter friend's name"
           value={newFriend}
           onChange={(e) => setNewFriend(e.target.value)}
@@ -308,11 +352,12 @@ const handleChatter =  (name)=>{
         <button onClick={handleAddFriend}>Add Friend</button>
       </div>
       <div className="chat-area">
-        <h2>${chatterName}</h2>
-        <ChatMessages messages={messages} /> {/* Add the ChatMessages component */}
+        <h2 className='chatterEmail'> {chatterEmail} </h2>
+        <ChatMessages messages={messages} value={chatterName} /> {/* Add the ChatMessages component */}
         <div className="message-input">
           <input
             type="text"
+            id='input_msg'
             placeholder="Type your message"
             onKeyPress={(e) => {
               if (e.key === 'Enter') {
@@ -323,10 +368,13 @@ const handleChatter =  (name)=>{
             }}
             
           />
+          <button className='message-input' onClick={handleButtonClick}> send</button>
 
           
         </div>
       </div>
+    </div>
+    <Footer />
     </div>
   );
 }

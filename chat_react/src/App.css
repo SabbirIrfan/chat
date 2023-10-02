@@ -1,0 +1,373 @@
+/* Reset some default styles */
+body,
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Set html and body height to 100% */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Global styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Login Page */
+.login-portion{
+  flex: 1.1;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  text-align: center;
+  margin: 0 auto;
+  padding-top: 250px;
+  padding-bottom: 300px;
+  
+
+} 
+
+/* ///// */
+.slider-container {
+  width: 70%; /* Adjust the width as needed */
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto; /* Center the container horizontally */
+  padding: 20px; /* Add padding for spacing */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); /* Add a shadow effect */
+  border-radius: 10px; /* Add rounded corners */
+  background-color: #ffffff; /* Set the background color */
+}
+
+.slider-page {
+  display: flex; /* Use flexbox for layout */
+  justify-content: center; /* Center content horizontally */
+  align-items: center; /* Center content vertically */
+  height: 100%; /* Set the height of each slide */
+  /* background-color: #f0f0f0; Background color for the slides */
+  border-radius: 10px; /* Add rounded corners to each slide */
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2); /* Add a shadow effect */
+  padding: auto;
+  padding-left: 0px;
+  margin: 0 10px; /* Add margin to create spacing between slides */
+  transition: background-color 0.3s ease; /* Add a transition effect for background color changes */
+  /* Additional styling properties as needed */
+}
+
+.slider-page:hover {
+  background-color: #e0e0e0; /* Change background color on hover */
+  cursor: pointer; /* Change cursor to pointer on hover */
+}
+
+.slider-page h2 {
+  font-size: 24px;
+  color: #333;
+}
+/* ////// */
+.slider {
+  flex: 1;
+  background-color: #f0f0f0;
+  padding: 20px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); /* Add shadow effect */
+  border-radius: 15px; /* Add rounded corners */
+  margin: 10px; /* Add margin to create spacing between sliders */
+  
+}
+
+
+
+
+
+
+
+.login-page h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.login-page input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.login-page button {
+  background-color: #5d7997;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.login-page button:hover {
+  background-color: #4b627a;
+}
+
+/* Chat Page */
+.chat-page {
+  display: flex;
+  justify-content: space-between;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 100%;
+
+  height: 800px; /* Make the ChatPage fill the full window */
+}
+
+.friend-list {
+  width: 20%;
+  padding-right: 20px;
+}
+
+.friend-list h5 {
+  font-size: 18px;
+  margin-bottom: 20px;
+  
+}
+
+.friend-list ul {
+  width: 50%;
+  list-style: none;
+  
+}
+.add-friend button{
+  background-color: black;
+  padding-bottom: 10px;
+}
+.friend-list li {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+.friend-button{
+  flex-direction: row;
+  font-size: 22px;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  
+}
+.friend-list input[type="text"] {
+  width: 95%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.friend-list button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.friend-list button:hover {
+  background-color: #0056b3;
+}
+.chatterEmail {
+  padding-top: 0%;
+  background-color: #667e97;
+  text-align: center;
+  height: 30px;
+  border-radius: 25px;
+  font-size: large;
+  font-style: oblique;
+}
+
+.chat-area {
+  flex: 1;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  padding: 10px;
+  overflow-y: auto;
+  height: 100%;
+  height: 100%; /* Make the Chat Area fill the remaining height */
+}
+
+.chat-area h2 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+/* Chat Messages */
+.chat-messages {
+  height: 80%;
+  max-height: 100%; /* Ensure messages don't overflow the chat area */
+  overflow-y: auto;
+  margin-bottom: 10px;
+}
+
+.message {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Align messages to the left */;
+  background-color: #6d9dd4;
+
+  padding: 4px;
+  
+  border-top-left-radius: 50px;
+  border-top-right-radius: 20px;
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: 500;
+  border-bottom-right-radius: 50px;
+  border-bottom-left-radius: 25px;
+
+  margin-bottom: 10px;
+}
+.friends {
+  
+  background-color: #6d9dd4;
+
+  padding: 5px;
+  
+  border-top-left-radius: 50px;
+  border-top-right-radius: 20px;
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: 500;
+  border-bottom-right-radius: 50px;
+  border-bottom-left-radius: 25px;
+
+  margin-bottom: 10px;
+}
+
+.message.sent {
+  background-color: #007bff;
+  color: #fff;
+  text-align: right;
+  margin-left: auto;
+}
+
+.message.received {
+  background-color: #f0f0f0;
+  color: #333;
+  text-align: left;
+  margin-right: auto;
+}
+
+/* Message Input */
+.message-input {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.message-input input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.message-input button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.message-input button:hover {
+  background-color: #0056b3;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .chat-page {
+    flex-direction: column;
+    padding: 5px;
+  }
+
+  .friend-list {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+}
+
+.login-page {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  text-align: center;
+  margin: 0 auto;
+  height: 900px;
+}
+
+.slider-left {
+  flex: 1;
+  background-color: #d4c9c9;
+  border-radius: 10px;
+  cursor: cell;
+
+  
+  /* Add additional styling for the left slider */
+}
+
+.login-content {
+  flex: 2;
+  background-color: #ffffff;
+  padding: 20px;
+  /* Add styling for the login portion */
+}
+
+.slider-right {
+  flex: 1;
+  background-color: #f0f0f0;
+  /* Add additional styling for the right slider */
+}
+
+.footer {
+  background-color: #6b8097;
+  color: #1a0202;
+  padding: 10px 0;
+  text-align: center;
+}
+
+/* .footer p {
+  padding: 10px;
+  margin: 0;
+  font-size: 14px;
+} */
+.footer div {
+
+  padding: 10px;
+  margin: 0;
+  font-size: 14px;
+}
+.footer a {
+  padding: 100px;
+}
