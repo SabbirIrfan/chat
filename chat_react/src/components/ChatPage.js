@@ -16,6 +16,18 @@ function ChatPage({ userEmail }) {
 
 
   useEffect(()=>{
+    let intervalId; // Declare intervalId outside of the if statement
+if (chatId) {
+  intervalId = setInterval(() => handleShowMessage(chatId), 1000); // 1000 milliseconds = 1 second
+   // Clear the interval if chatId is falsy
+}
+let intervalId2;
+
+
+if (intervalId) {
+  intervalId2 = setInterval(() => clearInterval(intervalId), 2000); // 1000 milliseconds = 1 second
+   // Clear the interval if chatId is falsy
+}
 
   },[messages]);
 useEffect(()=>{
@@ -62,19 +74,7 @@ useEffect(()=>{
         
   
 //   },[])
-// let intervalId; // Declare intervalId outside of the if statement
 
-// if (chatId) {
-//   intervalId = setInterval(() => handleShowMessage(chatId), 1000); // 1000 milliseconds = 1 second
-//    // Clear the interval if chatId is falsy
-// }
-// let intervalId2;
-
-
-// if (intervalId) {
-//   intervalId2 = setInterval(() => clearInterval(intervalId), 2000); // 1000 milliseconds = 1 second
-//    // Clear the interval if chatId is falsy
-// }
 
 
   

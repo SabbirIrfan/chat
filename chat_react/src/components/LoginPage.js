@@ -6,6 +6,7 @@ import Register from './Register';
 import { AppBar,Card } from '@material-ui/core';
 import { ArrowLeftOutlined, ArrowRightOutlined } from "@mui/icons-material";
 import { sliderItems } from "../data/data";
+import Footer from './Footer';
 
 const Container = styled.div`
   width: 100%;
@@ -47,17 +48,28 @@ const Slide = styled.div`
   height: 100vh;
   display: flex;
   align-items: left;
+  padding-right: 535px;
+
   background-color: #${(props) => props.bg};
 `;
 
 const ImgContainer = styled.div`
-  height: 100%;
+
+  height: 80%;
   flex: 1;
 `;
 
 const Image = styled.img`
-  height: 80%;
-  background-image: url('https://i.ibb.co/3fjhCLm/istockphoto-1415118219-1024x1024.jpg'); 
+  // height: 80%;
+  // background-image: url('https://i.ibb.co/3fjhCLm/istockphoto-1415118219-1024x1024.jpg'); 
+  width: 70vw;
+  height: 95vh;
+  display: flex;
+  align-items: left;
+  background-color: #f5fafd;
+  padding-left: 10px;
+  padding-right: 1200px;
+  padding-top: 20px;
 `;
 
 const InfoContainer = styled.div`
@@ -125,7 +137,6 @@ function LoginPage({ onLogin }) {
 
   return (
     <div className="login-page">
-           <AppBar />
 
          
           <div className="login-page">
@@ -163,13 +174,10 @@ function LoginPage({ onLogin }) {
       <Wrapper slideIndex={slideIndex}>
         {sliderItems.map((item) => (
           <Slide bg={item.bg} key={item.id}>
-            {/* <ImgContainer>
+            <ImgContainer>
               <Image src={item.img} />
-            </ImgContainer> */}
-            <InfoContainer>
-              <Title>{item.title}</Title>
-              <Desc>{item.desc}</Desc>
-            </InfoContainer>
+            </ImgContainer>
+            
           </Slide>
         ))}
       </Wrapper>
@@ -179,7 +187,7 @@ function LoginPage({ onLogin }) {
     </Container>
 
     </div>
-
+           
     </div>
   );
 }

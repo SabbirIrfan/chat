@@ -29,15 +29,13 @@ body {
 
 /* Login Page */
 .login-portion{
-  flex: 1.1;
+ flex: 1.12 1;
   background-color: #fff;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 33px;
+  box-shadow: 0 2px 4px rgba(21, 1, 1, 0.1);
   padding: 20px;
   text-align: center;
   margin: 0 auto;
-  padding-top: 250px;
-  padding-bottom: 300px;
   
 
 } 
@@ -130,7 +128,7 @@ body {
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 20px;
-  width: 100%;
+  width: 98%;
 
   height: 800px; /* Make the ChatPage fill the full window */
 }
@@ -324,7 +322,7 @@ body {
   padding: 20px;
   text-align: center;
   margin: 0 auto;
-  height: 900px;
+  height: 889px;
 }
 
 .slider-left {
