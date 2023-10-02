@@ -48,7 +48,7 @@ public class ChatController {
     }
 
     @GetMapping("/getChatId/{email1}/{email2}")
-    public Chat getChatId(@PathVariable String email1,@PathVariable String email2){
+    public Chat getChatEmails(@PathVariable String email1,@PathVariable String email2){
 
         return chatService.getChatIdByEmail(email1,email2);
 

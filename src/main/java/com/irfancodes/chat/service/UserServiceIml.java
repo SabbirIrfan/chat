@@ -106,7 +106,7 @@ public class UserServiceIml implements  UserService{
                 int user1Id = user1.getId();
                 int user2Id = user2.getId();
                 Set<String> friends1 = user1.getFriends();
-                Set<String> friends2 = user1.getFriends();
+                Set<String> friends2 = user2.getFriends();
 //                if(friends1==null){
 //                    friends1 = new HashSet<>();
 //                }
@@ -119,7 +119,7 @@ public class UserServiceIml implements  UserService{
 
                 user1.setFriends(friends1);
                 user2.setFriends(friends2);
-                String email1 = user1.getEmail();
+                String email1 = email;
                 String email2 = user2.getEmail();
                 List<String> sortChat = new ArrayList<>();
                 sortChat.add(email1);
@@ -127,11 +127,12 @@ public class UserServiceIml implements  UserService{
                 Collections.sort(sortChat);
 
                 String chatEmail = sortChat.get(0)+sortChat.get(1);
+                Chat ct = chatRepository.findByEmails(chatEmail);
+                Chat chat = new Chat(user1Id, user2Id, chatEmail);
 
-
-                Chat chat = new Chat(user1Id,user2Id,chatEmail);
-                chatRepository.save(chat);
-
+                if(ct==null) {
+                    chatRepository.save(chat);
+                }
 
                 Set<Integer> chats1 = user1.getChats();
                 Set<Integer> chats2 = user2.getChats();
