@@ -4,6 +4,8 @@ import com.irfancodes.chat.model.Chat;
 import com.irfancodes.chat.model.Message;
 import com.irfancodes.chat.service.ChatService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -24,8 +26,11 @@ public class ChatController {
 
     }
     @PostMapping("/addMessage")
-    public String addMessage(@RequestBody Message message){
-        return chatService.addMessage(message);
+//    @SendTo("topic/messages")
+    public Message addMessage(@RequestBody Message message){
+        String success =  chatService.addMessage(message);
+        System.out.println("was hit here" + message);
+        return message;
 
     }
     @GetMapping("/getAllMessage/{id}")

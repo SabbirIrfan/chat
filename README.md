@@ -5,13 +5,26 @@ This repository contains the backend code for a simple chat application built wi
 ## Table of Contents
 
 - [Getting Started](#getting-started)
-    - [Prerequisites](#prerequisites)
-    - [Installation](#installation)
+ - [Preview](#preview)
+- [Prerequisites](#prerequisites)
+  - [Installation](#installation)
 - [Configuration](#configuration)
     - [MySQL Database](#mysql-database)
 
 
+
 ## Getting Started
+This chat app,  offers user registration via name and email, with email-based login.
+It simplifies friend connections through names and supports private messaging.
+This Chat App is built on a robust tech stack. Its backend relies on the Spring Boot Java framework, 
+ensuring scalability and security. The frontend is developed using React for a dynamic user interface. 
+Data is stored and managed using MySQL, ensuring reliability and efficient data retrieval.
+## preview
+![Log in page used  a slider and a registration form](images/login-1.png)
+![Log in page used  a slider and a registration form](images/login-2.png)
+![Log in page used  a slider and a registration form](images/chat-1.png)
+![Log in page used  a slider and a registration form](images/chat-2.png)
+
 
 ### Prerequisites
 
@@ -52,7 +65,7 @@ sh
 mvn spring-boot:run
 
 
-# chat# Chat App FrontEnd  
+# Chat App FrontEnd  
 
 ## Getting Started with Create React App
 

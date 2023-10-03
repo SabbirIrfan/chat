@@ -2,6 +2,9 @@ import React, { useState,useEffect } from 'react';
 import ChatMessages from './ChatMessages'; // Import the ChatMessages component
 import { Sync } from '@material-ui/icons';
 import Footer from './Footer';
+import Stomp from 'stompjs';
+import SockJS from 'sockjs-client';
+import { json } from 'react-router-dom';
 function ChatPage({ userEmail }) {
   const  [mainUser,setMainUser] = useState('');
   
@@ -11,25 +14,91 @@ function ChatPage({ userEmail }) {
 //   const [email,setEmail] = useState(userEmail);
   const [chatterName, setChatterName] = useState('');
   const [chatterEmail, setChatterEmail] = useState('');
-
+  const [stompClient, setStompClient] = useState(null);
+ 
   const [chatId,setChatId] = useState();
 
+  useEffect(()=>{
+    const socket = new SockJS('http:/localhost:8080/ws');
+    const client = Stomp.over(socket);
+    client.connect({},()=>{
+      client.subscribe('/topic/messages',(message)=>{
+        if(message){
+        const recievedMessage = JSON.parse(message.body);
+        messages.push(recievedMessage);
+        setMessages((p)=>[...p,recievedMessage]);
+        }
+      })
+    }
+
+
+                
+    )
+    if(messages.body){
+    const receivedMessage = JSON.parse(messages)
+    }
+  },[]);
 
   useEffect(()=>{
     let intervalId; // Declare intervalId outside of the if statement
-if (chatId) {
-  intervalId = setInterval(() => handleShowMessage(chatId), 1000); // 1000 milliseconds = 1 second
+if(chatId) {
+  intervalId = setInterval(() => handleShowMessage(chatId), 100); // 1000 milliseconds = 1 second
    // Clear the interval if chatId is falsy
 }
 let intervalId2;
 
 
 if (intervalId) {
-  intervalId2 = setInterval(() => clearInterval(intervalId), 2000); // 1000 milliseconds = 1 second
+  intervalId2 = setInterval(() => clearInterval(intervalId), 500); // 1000 milliseconds = 1 second
    // Clear the interval if chatId is falsy
 }
 
   },[messages]);
+
+
+  const handleSendMessage = (text) => {
+    if(!chatId) return;
+
+
+    console.log(text);
+    
+    getChatId();
+    console.log(chatId);
+    let message ;
+    try {
+       message = {
+        "chatId": `${chatId}`,
+        "senderName" : `${mainUser.name}`,
+        "content" : `${text}`
+        
+        }  
+    } catch (error) {
+      console.log("in send message");
+    }
+    // if(message!=null){
+    // stompClient.send('/app/message/addMessage',{},JSON.stringify(message));
+    // }
+    try {
+      fetch(`http://localhost:8080/message/addMessage`,{
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify(message)
+      }).then(()=>{
+      })  
+    } catch (error) {
+      console.log(error);
+    }
+    
+    if (text.trim() !== '') {
+    
+      // Create a new message object and add it to the messages state
+      if(chatId)
+        {
+          handleShowMessage(chatId);
+        }
+    }
+  };
+
 useEffect(()=>{
     console.log(userEmail);
     if(!userEmail) return;
@@ -207,47 +276,6 @@ const handleChatter =  (name)=>{
     
 
 }
-
-  const handleSendMessage = (text) => {
-    if(!chatId) return;
-
-
-    console.log(text);
-    
-    getChatId();
-    console.log(chatId);
-    let message ;
-    try {
-       message = {
-        "chatId": `${chatId}`,
-        "senderName" : `${mainUser.name}`,
-        "content" : `${text}`
-        
-        }  
-    } catch (error) {
-      console.log("in send message");
-    }
-    
-    try {
-      fetch(`http://localhost:8080/message/addMessage`,{
-        method:"POST",
-        headers:{"Content-Type":"application/json"},
-        body:JSON.stringify(message)
-      }).then(()=>{
-      })  
-    } catch (error) {
-      console.log(error);
-    }
-    
-    if (text.trim() !== '') {
-    
-      // Create a new message object and add it to the messages state
-      if(chatId)
-        {
-          handleShowMessage(chatId);
-        }
-    }
-  };
 
 
   const getChtterMail = (value) =>{
