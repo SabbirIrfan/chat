@@ -22,8 +22,8 @@ Data is stored and managed using MySQL, ensuring reliability and efficient data 
 ## preview
 ![Log in page used  a slider and a registration form](images/login-1.png)
 ![Log in page used  a slider and a registration form](images/login-2.png)
-![Log in page used  a slider and a registration form](images/chat-1.png)
-![Log in page used  a slider and a registration form](images/chat-2.png)
+![Log in page used  a slider and a registration form](images/chat_1.png)
+![Log in page used  a slider and a registration form](images/chat_2.png)
 
 
 ### Prerequisites

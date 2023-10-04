@@ -5,6 +5,7 @@ import Footer from './Footer';
 import Stomp from 'stompjs';
 import SockJS from 'sockjs-client';
 import { json } from 'react-router-dom';
+import Friend from './ Friend';
 function ChatPage({ userEmail }) {
   const  [mainUser,setMainUser] = useState('');
   
@@ -15,31 +16,32 @@ function ChatPage({ userEmail }) {
   const [chatterName, setChatterName] = useState('');
   const [chatterEmail, setChatterEmail] = useState('');
   const [stompClient, setStompClient] = useState(null);
- 
+
+  const mainUserName = userEmail.split('@');
   const [chatId,setChatId] = useState();
 
-  useEffect(()=>{
-    const socket = new SockJS('http:/localhost:8080/ws');
-    const client = Stomp.over(socket);
-    client.connect({},()=>{
-      client.subscribe('/topic/messages',(message)=>{
-        if(message){
-        const recievedMessage = JSON.parse(message.body);
-        messages.push(recievedMessage);
-        setMessages((p)=>[...p,recievedMessage]);
-        }
-      })
-    }
+  // useEffect(()=>{
+  //   const socket = new SockJS('http:/localhost:8080/ws');
+  //   const client = Stomp.over(socket);
+  //   client.connect({},()=>{
+  //     client.subscribe('/topic/messages',(message)=>{
+  //       if(message){
+  //       const recievedMessage = JSON.parse(message.body);
+  //       messages.push(recievedMessage);
+  //       setMessages((p)=>[...p,recievedMessage]);
+  //       }
+  //     })
+  //   }
 
 
                 
-    )
-    if(messages.body){
-    const receivedMessage = JSON.parse(messages)
-    }
-  },[]);
+  //   )
+  //   if(messages.body){
+  //   const receivedMessage = JSON.parse(messages)
+  //   }
+  // },[]);
 
-  useEffect(()=>{
+  // useEffect(()=>{
     let intervalId; // Declare intervalId outside of the if statement
 if(chatId) {
   intervalId = setInterval(() => handleShowMessage(chatId), 100); // 1000 milliseconds = 1 second
@@ -49,11 +51,11 @@ let intervalId2;
 
 
 if (intervalId) {
-  intervalId2 = setInterval(() => clearInterval(intervalId), 500); // 1000 milliseconds = 1 second
+  intervalId2 = setInterval(() => clearInterval(intervalId), 1000); // 1000 milliseconds = 1 second
    // Clear the interval if chatId is falsy
 }
 
-  },[messages]);
+  // },[messages]);
 
 
   const handleSendMessage = (text) => {
@@ -147,7 +149,7 @@ useEffect(()=>{
 
 
   
-  const  handleShowMessage = (id) =>{
+  const  handleShowMessage =async (id) =>{
     console.log("fetched chat id? in show message")
     console.log(id)
     if(!id) {
@@ -155,7 +157,7 @@ useEffect(()=>{
     }
     try {
     
-      fetch(`http://localhost:8080/message/getAllMessage/${id}`)
+      await fetch(`http://localhost:8080/message/getAllMessage/${id}`)
       .then(
         (response) => {
           if (!response.ok) {
@@ -167,15 +169,15 @@ useEffect(()=>{
       .then((result)=>{
           
            
-          let msg =[];
+          // let msg =[];
   
           
-          result.forEach(element => {
-              msg.push(element.content);
-          });
-          console.log(msg);
-          if(msg.length == 0) return;
-          setMessages(msg);
+          // result.forEach(element => {
+          //     msg.push(element.content);
+          // });
+          // console.log(msg);
+          if(result.length == 0) return;
+          setMessages(result);
       }) .catch(error => {
         if (error.name === 'SyntaxError') {
           // Handle the case where the response body is empty or not valid JSON
@@ -224,18 +226,18 @@ useEffect(()=>{
 //   })
 // }
 
-const getChatId = ()=>{
+const getChatId = async ()=>{
     console.log("fetching chat Id");
     
     console.log("chatter email is "+ chatterEmail+" userEmail is "+ userEmail);
     if(!chatterEmail || !userEmail) 
     {
-        alert("no chat selected , try again");
+        alert("double click the please ");
         return;
 
     }
     try {
-      fetch(`http://localhost:8080/message/getChatId/${userEmail}/${chatterEmail}`)
+      await fetch(`http://localhost:8080/message/getChatId/${userEmail}/${chatterEmail}`)
     .then(
       (response) => {
         if (!response.ok) {
@@ -263,7 +265,7 @@ const getChatId = ()=>{
       console.log(error);
     }
     
-    handleShowMessage(chatId);
+    await handleShowMessage(chatId);
     // console.log(list2);
 
 }
@@ -278,14 +280,14 @@ const handleChatter =  (name)=>{
 }
 
 
-  const getChtterMail = (value) =>{
+  const getChtterMail = async (value) =>{
     console.log(value.type + "------- " + value)
     if(!value) {
       alert("please type the friend name properly and press enter twice");
       return;
     }
     try {
-      fetch(`http://localhost:8080/user/name/${value}`)
+      await fetch(`http://localhost:8080/user/name/${value}`)
     .then(
       (response) => {
         if (!response.ok) {
@@ -312,20 +314,20 @@ const handleChatter =  (name)=>{
     }
     
   }
-  const handleSetChat = (value) =>{
+  const handleSetChat = async (value) =>{
     
-    getChtterMail(value);
+    await getChtterMail(value);
 
     // setChatterName(value);
 
     console.log("chatter email is "+ chatterEmail);
-    getChatId();
+   await getChatId();
     if(chatId){
-     handleShowMessage(chatId)
+     await handleShowMessage(chatId)
     }
   }
 
-  function handleButtonClick() {
+  const  handleButtonClick = async ()=> {
     // Get the input element by its id
     const inputElement = document.getElementById('input_msg');
   
@@ -333,8 +335,8 @@ const handleChatter =  (name)=>{
     if (inputElement && inputElement.value) {
       const inputValue = inputElement.value;
       // Do something with the inputValue, like passing it to another function or component
-     handleSendMessage(inputValue);
-     if(chatId) handleShowMessage(chatId);
+      handleSendMessage(inputValue);
+     if(chatId) await handleShowMessage(chatId);
     } else {
       console.log('Input is empty');
     }
@@ -366,7 +368,8 @@ const handleChatter =  (name)=>{
         <ul className="friend-list ul">
           {friends.map((friend, index) => (
             <li id={index}>
-            <h5 className="friends" >{friend}</h5>
+             <Friend key={friend} friend={friend} onSelect={handleSetChat} />
+            {/* <button className="friends" onClick={handleSetChat(friend) }>{friend}</button> */}
             </li>
           ))}
         </ul>
@@ -381,7 +384,7 @@ const handleChatter =  (name)=>{
       </div>
       <div className="chat-area">
         <h2 className='chatterEmail'> {chatterEmail} </h2>
-        <ChatMessages messages={messages} value={chatterName} /> {/* Add the ChatMessages component */}
+        <ChatMessages messages={messages}  userName={mainUserName[0]} /> {/* Add the ChatMessages component */}
         <div className="message-input">
           <input
             type="text"
