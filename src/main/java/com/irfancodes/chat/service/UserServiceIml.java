@@ -25,14 +25,12 @@ public class UserServiceIml implements  UserService{
 
     @Override
     public Void register(User user) {
-        // Perform password hashing here before saving to the database
         userRepository.save(user);
         return null;
     }
     @Override
     public User login(String email) {
-        // Implement login logic here, including password validation
-        // Return the authenticated user or null if authentication fails
+
         return userRepository.findByEmail(email);
     }
 

@@ -81,7 +81,7 @@ if (intervalId) {
     // stompClient.send('/app/message/addMessage',{},JSON.stringify(message));
     // }
     try {
-      fetch(`http://localhost:8080/message/addMessage`,{
+      fetch(`http://localhost:8081/message/addMessage`,{
         method:"POST",
         headers:{"Content-Type":"application/json"},
         body:JSON.stringify(message)
@@ -105,7 +105,7 @@ useEffect(()=>{
     console.log(userEmail);
     if(!userEmail) return;
 
-    fetch(`http://localhost:8080/user/getAllFriend/${userEmail}`)
+    fetch(`http://localhost:8081/user/getAllFriend/${userEmail}`)
     .then(
       (response) => {
         if (!response.ok) {
@@ -119,7 +119,7 @@ useEffect(()=>{
       setFriends(result);
     }
   )
-  fetch(`http://localhost:8080/user/email/${userEmail}`)
+  fetch(`http://localhost:8081/user/email/${userEmail}`)
     .then(
       (response) => {
         if (!response.ok) {
@@ -157,7 +157,7 @@ useEffect(()=>{
     }
     try {
     
-      await fetch(`http://localhost:8080/message/getAllMessage/${id}`)
+      await fetch(`http://localhost:8081/message/getAllMessage/${id}`)
       .then(
         (response) => {
           if (!response.ok) {
@@ -167,23 +167,12 @@ useEffect(()=>{
         }
       )
       .then((result)=>{
-          
-           
-          // let msg =[];
-  
-          
-          // result.forEach(element => {
-          //     msg.push(element.content);
-          // });
-          // console.log(msg);
           if(result.length == 0) return;
           setMessages(result);
       }) .catch(error => {
         if (error.name === 'SyntaxError') {
-          // Handle the case where the response body is empty or not valid JSON
           console.error('Response does not contain valid JSON:', error);
         } else {
-          // Handle other types of errors, such as network errors
           console.error('Error:', error);
         }
       })  ;
@@ -196,7 +185,7 @@ useEffect(()=>{
   };
   const handleAddFriend = () => {
     
-    fetch(`http://localhost:8080/user/addFriend/${userEmail}/${newFriend}`,{
+    fetch(`http://localhost:8081/user/addFriend/${userEmail}/${newFriend}`,{
       method:"PUT",
       headers:{"Content-Type":"application/json"},
       
@@ -216,7 +205,7 @@ useEffect(()=>{
 //   const handleClick=(e)=>{
 //     e.preventDefault()
 //     const user = {newFriend}
-//     fetch(`http://localhost:8080/user/addFriend/${userEmail}/${newFriendd}`,{
+//     fetch(`http://localhost:8081/user/addFriend/${userEmail}/${newFriendd}`,{
 //       method:"POST",
 //       headers:{"Content-Type":"application/json"},
 //       body:JSON.stringify(user)
@@ -237,7 +226,7 @@ const getChatId = async ()=>{
 
     }
     try {
-      await fetch(`http://localhost:8080/message/getChatId/${userEmail}/${chatterEmail}`)
+      await fetch(`http://localhost:8081/message/getChatId/${userEmail}/${chatterEmail}`)
     .then(
       (response) => {
         if (!response.ok) {
@@ -287,7 +276,7 @@ const handleChatter =  (name)=>{
       return;
     }
     try {
-      await fetch(`http://localhost:8080/user/name/${value}`)
+      await fetch(`http://localhost:8081/user/name/${value}`)
     .then(
       (response) => {
         if (!response.ok) {

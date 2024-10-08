@@ -56,9 +56,7 @@ public class ChatServiceImpl implements ChatService {
     @Override
     public List<Message> getAllMessage(Integer chatId) {
 
-        List<Message> m =  messageRepository.findByChatId(chatId);
-        System.out.println(m +"message is added");
-        return  m;
+        return messageRepository.findByChatId(chatId);
     }
 
     @Override

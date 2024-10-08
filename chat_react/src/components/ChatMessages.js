@@ -6,7 +6,6 @@ function ChatMessages({ messages, userName }) {
   const chatContainerRef = useRef(null);
 
   useEffect(() => {
-    // Scroll to the bottom of the chat container when messages change
     chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
   }, [messages]);
 
